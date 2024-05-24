@@ -26,5 +26,4 @@ func runIsTheFirst(i, j *base.Command) bool {
 		return false
 	}
 	return left < right
-
 }

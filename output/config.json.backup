@@ -1,0 +1,64 @@
+{
+	"inbounds": [
+		{
+			"port": 1080,
+			"listen": "127.0.0.1",
+			"protocol": "socks",
+			"sniffing": {
+				"enabled": true,
+				"destOverride": [
+					"http",
+					"tls"
+				]
+			},
+			"settings": {
+				"udp": true,
+				"auth": "noauth"
+			}
+		}
+	],
+	"outbounds": [
+		{
+			"protocol": "vmess",
+			"settings": {
+				"vnext": [
+					{
+						"address": "43.156.129.154",
+						"port": 443,
+						"users": [
+							{
+								"id": "d672a294-4dd8-435a-bd3c-26cd07982425"
+							}
+						]
+					}
+				]
+			},
+			"streamSettings": {
+				"network": "ws",
+				"security": "tls",
+				"tlsSettings": {
+					"allowInsecure": true
+				},
+				"wsSettings": {
+					"path": "/ray"
+				}
+			}
+		},
+		{
+			"protocol": "freedom",
+			"tag": "direct"
+		}
+	],
+	"routing": {
+		"domainStrategy": "IPOnDemand",
+		"rules": [
+			{
+				"type": "field",
+				"ip": [
+					"geoip:private"
+				],
+				"outboundTag": "direct"
+			}
+		]
+	}
+}
